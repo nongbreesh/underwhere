@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserHeaderCell" rowHeight="50" id="iYq-hy-dMu" customClass="UserHeaderCell" customModule="Quam" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="341" height="64"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iYq-hy-dMu" id="WWA-P1-rrG">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tokens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soh-ef-VWt">
+                        <rect key="frame" x="275" y="10" width="53" height="20.5"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                        <color key="textColor" red="0.39873342803030298" green="0.39873342803030298" blue="0.39873342803030298" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breeshy sama" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-kL-TWZ">
+                        <rect key="frame" x="83" y="10" width="94" height="18"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.22561553030303028" green="0.22561553030303028" blue="0.22561553030303028" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="imgprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="mcA-aP-eAD">
+                        <rect key="frame" x="8" y="-35" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="ZeV-b7-NKm"/>
+                            <constraint firstAttribute="width" constant="70" id="fQy-wC-TPm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,554" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpV-xm-nv4">
+                        <rect key="frame" x="217" y="8" width="51.5" height="25.5"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="21"/>
+                        <color key="textColor" red="0.19215686269999999" green="0.66666666669999997" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mcA-aP-eAD" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="topMargin" constant="-1" id="3Yr-71-1tb"/>
+                    <constraint firstItem="mcA-aP-eAD" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="top" constant="-35" id="49F-Ks-b0v"/>
+                    <constraint firstItem="Tel-kL-TWZ" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="topMargin" constant="2" id="BxU-eM-UP4"/>
+                    <constraint firstItem="Soh-ef-VWt" firstAttribute="trailing" secondItem="WWA-P1-rrG" secondAttribute="trailingMargin" constant="-5" id="Gdc-OQ-sFC"/>
+                    <constraint firstItem="Soh-ef-VWt" firstAttribute="leading" secondItem="bpV-xm-nv4" secondAttribute="trailing" constant="6" id="J0l-ui-rPI"/>
+                    <constraint firstItem="mcA-aP-eAD" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="topMargin" constant="-35" id="Qnd-E2-mN5"/>
+                    <constraint firstItem="mcA-aP-eAD" firstAttribute="leading" secondItem="WWA-P1-rrG" secondAttribute="leadingMargin" id="UTb-YR-9aR"/>
+                    <constraint firstItem="bpV-xm-nv4" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="topMargin" id="ZUw-2X-6Xx"/>
+                    <constraint firstItem="Tel-kL-TWZ" firstAttribute="leading" secondItem="WWA-P1-rrG" secondAttribute="leadingMargin" constant="75" id="aMY-AN-2FF"/>
+                    <constraint firstItem="mcA-aP-eAD" firstAttribute="leading" secondItem="WWA-P1-rrG" secondAttribute="leadingMargin" id="aOA-Ai-voj"/>
+                    <constraint firstItem="Soh-ef-VWt" firstAttribute="top" secondItem="WWA-P1-rrG" secondAttribute="topMargin" constant="2" id="l1u-tx-6xF"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="3Yr-71-1tb"/>
+                        <exclude reference="Qnd-E2-mN5"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgProfile" destination="mcA-aP-eAD" id="qLu-E0-Csf"/>
+                <outlet property="lblTokenPoint" destination="bpV-xm-nv4" id="dvh-go-uzH"/>
+                <outlet property="lblUserName" destination="Tel-kL-TWZ" id="jcV-Ia-EVS"/>
+            </connections>
+            <point key="canvasLocation" x="174.5" y="189"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="imgprofile.png" width="384" height="384"/>
+    </resources>
+</document>
