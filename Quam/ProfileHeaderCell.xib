@@ -68,7 +68,7 @@
                             <constraint firstItem="jkU-9Q-tC3" firstAttribute="top" secondItem="DQ8-Rf-aFW" secondAttribute="top" id="bly-vn-TK7"/>
                             <constraint firstAttribute="trailing" secondItem="Vl8-vl-WN0" secondAttribute="trailing" constant="10" id="lUD-jr-SPh"/>
                             <constraint firstItem="rCa-QZ-8bM" firstAttribute="top" secondItem="uhi-3S-X2e" secondAttribute="bottom" constant="5" id="pg3-7F-osu"/>
-                            <constraint firstItem="Vl8-vl-WN0" firstAttribute="top" secondItem="DQ8-Rf-aFW" secondAttribute="top" constant="40" id="ys0-eN-Q5e"/>
+                            <constraint firstItem="Vl8-vl-WN0" firstAttribute="top" secondItem="DQ8-Rf-aFW" secondAttribute="top" constant="30" id="ys0-eN-Q5e"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
