@@ -101,8 +101,7 @@ class LoginViewController: UIViewController{
                     dispatch_async(dispatch_get_main_queue(), {
 
 
-                        let result: AnyObject? =  NSJSONSerialization.JSONObjectWithData(NSData(), options: NSJSONReadingOptions(), error: NSErrorPointer())
-
+                        let result: AnyObject? =  NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(), error: NSErrorPointer())
 
                         var _result = result!.objectForKey("result") as? String
                          let fbid = result!.objectForKey("fbid") as? String
@@ -114,7 +113,8 @@ class LoginViewController: UIViewController{
                             NSUserDefaults.standardUserDefaults().setObject(userid, forKey: "userid")
                             NSUserDefaults.standardUserDefaults().setObject(is_posttowall, forKey: "is_posttowall")
 
-                            self.navigationController!.interactivePopGestureRecognizer!.enabled = true
+
+                            self.navigationController!.interactivePopGestureRecognizer!.enabled = false
 
                             self.islogout = false
 
@@ -207,7 +207,7 @@ class LoginViewController: UIViewController{
 
                             dispatch_async(dispatch_get_main_queue(), {
 
-                              let result: AnyObject? =  NSJSONSerialization.JSONObjectWithData(NSData(), options: NSJSONReadingOptions(), error: NSErrorPointer())
+                              let result: AnyObject? =  NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(), error: NSErrorPointer())
                                 ActivityIndicatory(self.view,false,false)
 
                                 let data = result!.objectForKey("result") as? String
@@ -237,7 +237,7 @@ class LoginViewController: UIViewController{
 
                                     NSUserDefaults.standardUserDefaults().setObject(userid, forKey: "userid")
                                     NSUserDefaults.standardUserDefaults().setObject(is_posttowall, forKey: "is_posttowall")
-
+                                     self.navigationController!.interactivePopGestureRecognizer!.enabled = false
                                     self.islogout = false
                                     let vc : AppTabBarController! =  self.storyboard?.instantiateViewControllerWithIdentifier("tabview") as! AppTabBarController
                                     self.showViewController(vc, sender: vc)

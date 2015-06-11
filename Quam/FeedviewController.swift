@@ -27,6 +27,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
     var ListArray = NSMutableArray()
     var preventAnimation = Set<NSIndexPath>()
 
+    @IBOutlet var lblNoData: UILabel!
     @IBOutlet var holizonbg: UIView!
     @IBOutlet var horizontalView: MMHorizontalListView!
 
@@ -218,6 +219,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
 
 
     override func viewWillAppear(animated: Bool) {
+        self.lblNoData.hidden = true
         self.offset = 0
         self.limit = 20
         self.nextpage  = 0
@@ -274,6 +276,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
                 dispatch_async(dispatch_get_main_queue(), {
                     var data: [AnyObject]! = result?.objectForKey("result") as! [AnyObject]!
                     if data.count > 0{
+                        self.lblNoData.hidden = true
                         for (index, element) in enumerate(data) {
 
                             var slist =   [String:String]()
@@ -335,6 +338,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
                         }
                     }
                     else{
+                        self.lblNoData.hidden = false
                         self.refreshControl.endRefreshing()
                         self.tb.tableFooterView?.hidden = true
                         self.tb.reloadData()

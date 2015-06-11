@@ -206,7 +206,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
     func getNearby(){
         self.refreshControl.beginRefreshing()
 
-       // ActivityIndicatory(self.mainview ,true,false)
+        ActivityIndicatory(self.view ,true,false)
         let url = NSURL(string:"http://api.underwhere.in/api/getfavlocationaround")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
@@ -271,7 +271,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
                         self.lblwelcomedetail.hidden = false
                         self.btn_setnewLoc.hidden = false
                     }
-                    //ActivityIndicatory(self.mainview ,false,false)
+                    ActivityIndicatory(self.view ,false,false)
                 })
             }
 
@@ -284,7 +284,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
 
     func getPopular(){
         self.refreshControl.beginRefreshing()
-      //  ActivityIndicatory(self.mainview ,true,false)
+        ActivityIndicatory(self.view ,true,false)
         let url = NSURL(string:"http://api.underwhere.in/api/getpopularlocation")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
@@ -347,7 +347,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
                         self.lblwelcomedetail.hidden = false
                          self.btn_setnewLoc.hidden = false
                     }
-                    // ActivityIndicatory(self.mainview ,false,false)
+                     ActivityIndicatory(self.view ,false,false)
                 })
             }
 
@@ -359,7 +359,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
 
     func getNewest(){
         self.refreshControl.beginRefreshing()
-      //  ActivityIndicatory(self.mainview ,true,false)
+        ActivityIndicatory(self.view ,true,false)
         let url = NSURL(string:"http://api.underwhere.in/api/getnewestlocation")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
@@ -421,7 +421,7 @@ var user_image: String?  = element.objectForKey("user_image")as? String
                         self.lblwelcomedetail.hidden = false
                         self.btn_setnewLoc.hidden = false
                     }
-                    // ActivityIndicatory(self.mainview ,false,false)
+                     ActivityIndicatory(self.view ,false,false)
                 })
             }
             

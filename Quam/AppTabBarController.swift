@@ -167,7 +167,7 @@ class AppTabBarController: UITabBarController,UITabBarDelegate,BadgeListener{
         case "เกิดอะไรขึ้น":
             //            self.btn_Openmap.hidden = true
             //            self.btn_post.hidden = false
-            self.navigationController?.navigationBarHidden = false
+            self.navigationController?.navigationBarHidden = true
             self.navigationItem.title = "เกิดอะไรขึ้น"
         case "สถานที่":
             //            self.btn_post.hidden = true

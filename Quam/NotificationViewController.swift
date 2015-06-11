@@ -251,7 +251,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate,UITableV
 
 
         let cell:notificationCell_1 = tableView.dequeueReusableCellWithIdentifier(notificationCell_1.reuseIdentifier) as! notificationCell_1
-
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = false;
         var myMutableString = NSMutableAttributedString()
         var titleString = NSMutableAttributedString()
         myMutableString = NSMutableAttributedString(string: "\(name)", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 12.0)!,NSForegroundColorAttributeName: colorize(0xff6a6e, alpha: 1)])

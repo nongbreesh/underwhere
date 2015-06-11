@@ -100,7 +100,7 @@ class RegisterViewController: UIViewController ,UIGestureRecognizerDelegate{
                             }
 
                             dispatch_async(dispatch_get_main_queue(), {
-                                var result = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: NSErrorPointer()) as! NSDictionary
+                                var result = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(), error: NSErrorPointer()) as! NSDictionary
                                 ActivityIndicatory(self.view,false,false)
 
                                 var data = result.objectForKey("result") as? String
@@ -152,7 +152,7 @@ class RegisterViewController: UIViewController ,UIGestureRecognizerDelegate{
 
                                     NSUserDefaults.standardUserDefaults().setObject(userid, forKey: "userid")
                                     NSUserDefaults.standardUserDefaults().setObject(is_posttowall, forKey: "is_posttowall")
-                                    
+                                     self.navigationController!.interactivePopGestureRecognizer!.enabled = false
                                     let vc : AnyObject! =  self.storyboard?.instantiateViewControllerWithIdentifier("tabview")
                                     self.showViewController(vc as! UIViewController, sender: vc)
                                     

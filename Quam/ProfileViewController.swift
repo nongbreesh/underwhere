@@ -105,9 +105,14 @@ class ProfileViewController: UIViewController , UITableViewDelegate
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView){
-        let change_opacity = scrollView.contentOffset.y / 300.0
-        if change_opacity <= 1.0 && change_opacity >= 0.0 {
-            self.statusbarbg.backgroundColor = colorize(0x2cc285, alpha: Double(change_opacity))
+        if scrollView.contentOffset.y > 100 {
+            let change_opacity = scrollView.contentOffset.y / 300.0
+            if change_opacity <= 1.0 && change_opacity >= 0.0 {
+                self.statusbarbg.backgroundColor = colorize(0x2cc285, alpha: Double(change_opacity))
+            }
+        }
+        else{
+            self.statusbarbg.backgroundColor = colorize(0x2cc285, alpha:0.0)
         }
     }
 
@@ -238,10 +243,15 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
 
     func getPostData(currentPage:Int,nexPage:Int){
+        var strownerid = "0"
+        if let ownerid = NSUserDefaults.standardUserDefaults().objectForKey("userid") as? String{
+            strownerid  = ownerid
+        }
+
         let url = NSURL(string:"http://api.underwhere.in/api/getmypost")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
-        let postString = "userid=\(userid)&lat=\(self.userlat)&lng=\(self.userlng)&currentPage=\(currentPage)&nextPage=\(nexPage)"
+        let postString = "userid=\(userid)&lat=\(self.userlat)&lng=\(self.userlng)&currentPage=\(currentPage)&nextPage=\(nexPage)&profileid=\(strownerid)"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
 
         let task : NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
@@ -398,7 +408,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
                 var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
 
-                visualEffectView.frame =  cell.bgProfile.bounds
+                visualEffectView.frame =  CGRect(x: 0, y: 0, width: cell.bgProfile.frame.width + 20, height: cell.bgProfile.frame.height)
 
                 cell.bgProfile.addSubview(visualEffectView)
 
@@ -586,11 +596,16 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
         var id = sender.tag
 
+        var strownerid = "0"
+        if let ownerid = NSUserDefaults.standardUserDefaults().objectForKey("userid") as? String{
+            strownerid  = ownerid
+        }
+
         if id != 0{
             let url = NSURL(string:"http://api.underwhere.in/api/addLove")
             let request = NSMutableURLRequest(URL:url!)
             request.HTTPMethod = "POST"
-            let postString = "userid=\(self.userid)&postid=\(id)"
+            let postString = "userid=\(strownerid)&postid=\(id)"
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
 
             let task : NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
@@ -683,11 +698,17 @@ class ProfileViewController: UIViewController , UITableViewDelegate
         let id = ListArray.objectAtIndex(actionSheet.tag)["id"] as! String
         let createby = ListArray.objectAtIndex(actionSheet.tag)["createby"] as! String
 
+        var strownerid = "0"
+        if let ownerid = NSUserDefaults.standardUserDefaults().objectForKey("userid") as? String{
+            strownerid  = ownerid
+        }
+
+
         if buttonTitle.isEqual("Delete Post") {
-            self.deletePost(id,createby: createby)
+            self.deletePost(id,createby: strownerid)
 
         } else if  buttonTitle.isEqual("Report"){
-            self.reportPost(id,createby: createby)
+            self.reportPost(id,createby: strownerid)
         }
     }
 

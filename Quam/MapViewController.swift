@@ -68,6 +68,14 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
 
 
     }
+
+    override func viewWillAppear(animated: Bool){
+
+        self.navigationController?.navigationBarHidden = false
+        
+    }
+
+    
     @IBAction func btn_suggest(sender: AnyObject) {
 
         //self.tabBarController?.title = ""

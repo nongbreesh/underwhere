@@ -10,6 +10,7 @@ import UIKit
 
 class PostDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIScrollViewDelegate ,UIActionSheetDelegate{
 
+    @IBOutlet var loading: UIActivityIndicatorView!
     @IBOutlet var navitem: UINavigationItem!
     @IBOutlet var txtComment: UITextField!
     var userid:NSString = ""
@@ -39,6 +40,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
     var didLike = [Int]()
     var didCountLike = [Int,Int]()
     var chkcell = [Int]()
+    var isloaded = false
 
     @IBOutlet var keyboardHeight: NSLayoutConstraint!
     @IBOutlet var btnMore: UIBarButtonItem!
@@ -51,7 +53,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
             self.userid = ""
         }
 
-        self.getData()
+        
         self.btn_send.enabled = false
 
         self.tb.delegate = self
@@ -239,6 +241,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
 
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
+        self.loading.startAnimating()
         self.navigationController?.navigationBarHidden = false
         self.didLike = [Int]()
         self.didCountLike = [Int,Int]()
@@ -249,6 +252,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
 
         navigationController?.hidesBarsOnSwipe = false
 
+    }
+
+    override func viewDidAppear(animated: Bool){
+        self.getData()
     }
 
 
@@ -323,7 +330,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
     }
 
     @IBAction func btn(sender: AnyObject) {
-
+        self.isloaded = false
         if(self.txtComment.text != ""){
             ActivityIndicatory(self.navigationController!.view,true,false)
             let url = NSURL(string:"http://api.underwhere.in/api/postcomment")
@@ -473,18 +480,24 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
 
                         self.refreshControl.endRefreshing()
                         //ActivityIndicatory(self.view ,false,false)
-                        self.tb.reloadData()
 
 
+                        if !self.isloaded {
+                              self.tb.reloadData()
+                            if self.isscrollToBottom{
                         let delay = 0.3 * Double(NSEC_PER_SEC)
                         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                         dispatch_after(time, dispatch_get_main_queue()) {
-                            if self.isscrollToBottom{
+
                                 self.scrolltoBottom()
                                 self.isscrollToBottom = false
-                            }
-                        }
 
+                        }
+                            }
+                            self.isloaded = true
+                        }
+                         self.loading.stopAnimating()
+                        self.loading.hidden = true
 
                     }
                     return
