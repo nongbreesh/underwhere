@@ -36,6 +36,7 @@ class PostDetailCell: UITableViewCell{
     @IBOutlet weak var lbl_createdate: UILabel!
     var TRY_AN_ANIMATED_GIF = 0
     var profileid:String!
+    var createBy = ""
 
     @IBOutlet weak var lbl_range: UILabel!
 
@@ -159,6 +160,7 @@ class PostDetailCell: UITableViewCell{
             vc.profileid = self.profileid
             vc.userlat = self.lat
             vc.userlng = self.lng
+            vc.title = createBy
             self.parent.showViewController(vc as UIViewController, sender: vc)
         }
     }

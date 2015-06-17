@@ -164,16 +164,17 @@ class ProfileViewController: UIViewController , UITableViewDelegate
         self.didCountLike = [Int,Int]()
         self.chkcell = [Int]()
         self.tabBarController?.delegate = self
-        self.tabBarController?.title = "ข้อมูลส่วนตัว"
 
         if self.profileid != nil {
             self.navigationController?.navigationBarHidden = false
         }
         else{
             self.navigationController?.navigationBarHidden = true
+            self.tabBarController?.title = "ข้อมูลส่วนตัว"
         }
 
     }
+
 
 
     func reload(){
@@ -371,7 +372,19 @@ class ProfileViewController: UIViewController , UITableViewDelegate
             var count_location: String  = ListArray.objectAtIndex(indexPath.row)["count_location"] as! String
 
             //var locationame: String?  = ListArray.objectAtIndex(indexPath.row)["locationame"] as? String
-
+            if self.profileid != "" && self.profileid != nil {
+                if let ownerid = NSUserDefaults.standardUserDefaults().objectForKey("userid") as? String{
+                    if  self.profileid == ownerid{
+                        cell.btn_upload_image.hidden = false
+                    }
+                    else{
+                        cell.btn_upload_image.hidden = true
+                    }
+                }
+            }
+            else{
+                cell.btn_upload_image.hidden = false
+            }
 
             cell.lblPost.text = count_post
             cell.lblLocation.text = count_location

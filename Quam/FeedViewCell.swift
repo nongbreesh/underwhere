@@ -47,6 +47,7 @@ class FeedViewCell: UITableViewCell,UIActionSheetDelegate{
     var cntfollowing:Int = 0
     var userid:String = ""
     var profileid:String!
+    var createBy =  ""
 
 
 
@@ -229,11 +230,12 @@ class FeedViewCell: UITableViewCell,UIActionSheetDelegate{
     func openProfile(gesture:UIGestureRecognizer!){
         if self.profileid != nil {
             UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-            self.parent.navigationController?.navigationBarHidden = false
+            //self.parent.navigationController?.navigationBarHidden = false
             let vc : ProfileViewController! =  self.parent.storyboard?.instantiateViewControllerWithIdentifier("profile") as! ProfileViewController
             vc.profileid = self.profileid
             vc.userlat = self.lat
             vc.userlng = self.lng
+            vc.title = createBy
             self.parent.showViewController(vc as UIViewController, sender: vc)
         }
     }
@@ -242,7 +244,7 @@ class FeedViewCell: UITableViewCell,UIActionSheetDelegate{
     func openPlace(gesture:UIGestureRecognizer!){
         if self.locid != nil {
             UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-            self.parent.navigationController?.navigationBarHidden = false
+            //self.parent.navigationController?.navigationBarHidden = false
             let vc : FeedviewController! =  self.parent.storyboard?.instantiateViewControllerWithIdentifier("Feedview") as! FeedviewController
             vc.locationid = self.locid
             vc.lat = self.lat

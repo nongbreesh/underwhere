@@ -229,7 +229,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
         self.didCountLike = [Int,Int]()
         self.chkcell = [Int]()
         self.tb.tableFooterView?.hidden = false
-        //        self.statusbarbg.hidden = true
+        self.navigationController?.navigationBarHidden = false
         UIApplication.sharedApplication().statusBarHidden = false
         self.getData(locationid!,lat: self.lat!,lng: self.lng!,currentPage: self.offset,nexPage: self.limit)
     }
@@ -320,7 +320,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
                             slist.updateValue(locid, forKey: "locid")
                             slist.updateValue(is_like!, forKey: "is_like")
                             slist.updateValue(count_like!, forKey: "count_like")
-                             slist.updateValue(user_image, forKey: "user_image")
+                            slist.updateValue(user_image, forKey: "user_image")
 
 
 
@@ -393,8 +393,8 @@ class FeedviewController: UIViewController , UITableViewDelegate
         var locid: String! = ListArray.objectAtIndex(indexPath.row)["locid"] as! String
         var count_like: String! = ListArray.objectAtIndex(indexPath.row)["count_like"] as! String
         var is_like: String! = ListArray.objectAtIndex(indexPath.row)["is_like"] as! String
- var user_image: String! = ListArray.objectAtIndex(indexPath.row)["user_image"] as! String
- var createby: String! = ListArray.objectAtIndex(indexPath.row)["createby"] as! String
+        var user_image: String! = ListArray.objectAtIndex(indexPath.row)["user_image"] as! String
+        var createby: String! = ListArray.objectAtIndex(indexPath.row)["createby"] as! String
         distance = String(format: "%.2f", distance.doubleValue)
 
         if(images != ""){
@@ -405,10 +405,11 @@ class FeedviewController: UIViewController , UITableViewDelegate
 
             cell.profileid = createby
             cell.lat = self.lat
-               cell.lng = self.lng
+            cell.lng = self.lng
+            cell.createBy = name
 
             let imgprofile:NSURL!
-             if user_image == "" {
+            if user_image == "" {
                 imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
             }
             else{
@@ -652,15 +653,15 @@ class FeedviewController: UIViewController , UITableViewDelegate
                         var data: AnyObject? = result?.objectForKey("result")
 
                         self.navigationController?.popToRootViewControllerAnimated(true)
-
+                        
                     })
-
+                    
                 }
-
+                
             });
             task.resume()
         }))
-
+        
         refreshAlert.addAction(UIAlertAction(title: "Cancle", style: .Cancel, handler: { (action: UIAlertAction!) in
             
         }))
@@ -669,7 +670,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
     
     func reportPost(postid:String,createby:String){
         
-      
+        
         let url = NSURL(string:"http://api.underwhere.in/api/reportpost")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
@@ -682,7 +683,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
                 dispatch_async(dispatch_get_main_queue(), {
                     var result = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: NSErrorPointer()) as? NSDictionary
                     var data: AnyObject? = result?.objectForKey("result")
-
+                    
                     let alertController = UIAlertController(title: "Message", message:
                         "This post has been reported to us", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.view.tintColor = UIColor.blueColor()

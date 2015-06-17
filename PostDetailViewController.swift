@@ -548,6 +548,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
             var cell:PostDetailCell = tableView.dequeueReusableCellWithIdentifier(PostDetailCell.reuseIdentifier) as! PostDetailCell
             cell.layoutMargins = UIEdgeInsetsZero;
             cell.preservesSuperviewLayoutMargins = false;
+            cell.createBy = name
             let imgprofile:NSURL!
             if user_image == "" {
                 imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");

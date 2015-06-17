@@ -21,6 +21,7 @@ class ProfileHeaderCell: UITableViewCell , UIActionSheetDelegate, PECropViewCont
     @IBOutlet weak var bgview: UIView!
     @IBOutlet weak var mainview: UIView!
     var userid:String!
+    var isMyProfile = true
     var parent:UIViewController!
     var _IMGSIZE:CGFloat! = 120
 
@@ -38,6 +39,8 @@ class ProfileHeaderCell: UITableViewCell , UIActionSheetDelegate, PECropViewCont
         self.mainview.backgroundColor =  colorize(0xEEF2F5, alpha: 1)
         //self.bgview.backgroundColor = colorize(0x916aab, alpha: 0.95)
         //self.bg.backgroundColor = colorize(0x916aab, alpha: 0.95)
+
+      
 
     }
 

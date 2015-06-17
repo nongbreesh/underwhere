@@ -12,7 +12,7 @@ import MapKit
 
 class PostViewController: UIViewController,UITextViewDelegate , CLLocationManagerDelegate , UIActionSheetDelegate, PECropViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
     @IBOutlet var btnsavesuggest: UIButton!
-
+      @IBOutlet var keyboardHeight: NSLayoutConstraint!
     @IBOutlet var lblsetLoc: UILabel!
     @IBOutlet var uiviewprogess: UIView!
     @IBOutlet var uploadProgess: UIProgressView!
@@ -24,7 +24,6 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var theMap: MKMapView!
     @IBOutlet weak var btn_camera: UIBarButtonItem!
-    @IBOutlet weak var lblPlace: UILabel!
     @IBOutlet weak var lblto: UILabel!
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var btndone: UIBarButtonItem!
@@ -76,11 +75,45 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
         self.updateEditButtonEnabled()
         self.uiviewprogess.hidden = true
         self.uploadProgess.setProgress(0, animated: true)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
 
         // self.getNearby()
     }
+
+
+
+
+    func keyboardWillShow(notification: NSNotification) {
+        let info:NSDictionary =  notification.userInfo!
+        let kbFrame:NSValue  = info.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame:CGRect  = kbFrame.CGRectValue()
+        var fullHeight   = self.view.frame.height
+        if DeviceType.IS_IPHONE_4_OR_LESS{
+            fullHeight = self.view.frame.height + 105
+        }
+        else if DeviceType.IS_IPHONE_5{
+            fullHeight = self.view.frame.height  + 15
+        }
+        else if DeviceType.IS_IPHONE_6{
+            fullHeight = self.view.frame.height  - 75
+        }
+        else if DeviceType.IS_IPHONE_6P{
+            fullHeight = self.view.frame.height  - 115
+        }
+        var hdiff = self.theMap.frame.height + self.navBar.frame.height
+        self.keyboardHeight.constant = (fullHeight  - hdiff) - keyboardFrame.size.height
+    }
+
+    func keyboardWillHide(notification: NSNotification) {
+        self.keyboardHeight.constant = 0
+
+        UIView.animateWithDuration(0.2) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+
 
     func selectPlace(sender:UITapGestureRecognizer) {
         let vc :SelectPlaceViewController! = self.storyboard?.instantiateViewControllerWithIdentifier("selectPlace") as! SelectPlaceViewController
@@ -96,20 +129,20 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
     }
 
 
-    func keyboardWillShow(notification: NSNotification) {
-
-        if let userInfo = notification.userInfo {
-            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                kbHeight = keyboardSize.height
-                self.animateTextField(true)
-                self.scrolltoBottom()
-            }
-        }
-    }
-
-    func keyboardWillHide(notification: NSNotification) {
-        self.animateTextField(false)
-    }
+//    func keyboardWillShow(notification: NSNotification) {
+//
+//        if let userInfo = notification.userInfo {
+//            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//                kbHeight = keyboardSize.height
+//                self.animateTextField(true)
+//                self.scrolltoBottom()
+//            }
+//        }
+//    }
+//
+//    func keyboardWillHide(notification: NSNotification) {
+//        self.animateTextField(false)
+//    }
 
     func scrolltoBottom(){
         // let offset = CGPoint(x: 0, y:self.view.frame.size.height)
@@ -239,6 +272,7 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
                         let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
                         let underlineAttributedString = NSAttributedString(string:locname, attributes: underlineAttribute)
                         self.lblto.attributedText = underlineAttributedString
+                        self.lblto.textAlignment = .Left
                         self.locations_id =   "\(locid)"
                         var timer = NSTimer.scheduledTimerWithTimeInterval(0, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
                     }
@@ -452,7 +486,6 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
                     //self.lblto.text = "My Location near \(locname)"
                     let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
                     let underlineAttributedString = NSAttributedString(string:locname, attributes: underlineAttribute)
-                    self.lblPlace.attributedText = underlineAttributedString
 
                 })
 
@@ -607,7 +640,7 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
 
                                         var placeto:String!  =  self.lblto.text
                                         if self.is_posttowall == "1" {
-                                            var place:String! = self.lblPlace.text
+
                                             self.postToFacebook("\(self.textInput.text)",link: "http://underwhere.in/post/index/\(postid)",picture: "http://api.underwhere.in/public/uploads/post_img/\(FileName)",placeto: "\(placeto)");
                                         }
 
@@ -721,6 +754,7 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
                         let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
                         let underlineAttributedString = NSAttributedString(string:allloc, attributes: underlineAttribute)
                         self.lblto.attributedText = underlineAttributedString
+                        self.lblto.textAlignment = .Left
                         self.locations_id =   alllocid
                         ActivityIndicatory(self.view ,false,false)
                     }
