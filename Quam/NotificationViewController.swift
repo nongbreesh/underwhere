@@ -51,6 +51,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate,UITableV
         self.parent = self
         self.view.backgroundColor = colorize(0xDFE2E5, alpha: 1)
         self.tb.separatorColor = colorize(0xDFE2E5, alpha: 1)
+        self.lblwelcome.textColor =  colorize(0x2cc285, alpha: 1)
         //self.statusbarbg.backgroundColor =  colorize(0x9068AB, alpha:  1)
         self.tb.backgroundColor = UIColor.clearColor()
         self.tb.separatorInset = UIEdgeInsetsZero

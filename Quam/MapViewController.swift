@@ -243,6 +243,7 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
 
             if(error == nil){
                 dispatch_async(dispatch_get_main_queue(), {
+                    if data != nil {
                     var removeAnotations : [AnyObject]! = self.theMap.annotations
                     self.theMap.removeAnnotations(removeAnotations)
 
@@ -270,6 +271,10 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
                         //                        var circle = MKCircle(centerCoordinate: center, radius: self._radius)
                         //                        self.theMap.addOverlay(circle)
 
+                    }
+                    }
+                    else{
+                        
                     }
 
 

@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
     var preventAnimation = Set<NSIndexPath>()
     var setBG = Set<NSIndexPath>()
     @IBOutlet weak var tb_profile: UITableView!
+     @IBOutlet var bg: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,6 +70,8 @@ class ProfileViewController: UIViewController , UITableViewDelegate
         else{
             self.tb_profile.contentInset = UIEdgeInsetsMake(-20,0, 0, 0)
         }
+
+        self.bg.backgroundColor = colorize(0xDFE2E5, alpha: 1)
         self.tb_profile.separatorColor = colorize(0xDFE2E5, alpha: 1)
         self.tb_profile.backgroundColor = colorize(0xDFE2E5, alpha: 1)
         self.tb_profile.separatorInset = UIEdgeInsetsZero

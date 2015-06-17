@@ -174,7 +174,7 @@ class SettingViewController: UITableViewController,UITableViewDelegate {
                         self.switch_posttowall.setOn(false, animated:true)
                     }
 
-                    if fbid.toInt()! == 0{
+                    if fbid != "0"{
 
                         let recognizer = UITapGestureRecognizer(target: self, action: Selector("fbConect:"))
                         self.cell_fb_connect.addGestureRecognizer(recognizer)

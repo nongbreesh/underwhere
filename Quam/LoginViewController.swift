@@ -13,6 +13,7 @@ import MapKit
 
 class LoginViewController: UIViewController{
 
+    @IBOutlet var keyboardHeight: NSLayoutConstraint!
     @IBOutlet var targetView: UIView!
     let spanX = 0.1
     let spanY = 0.1
@@ -43,6 +44,29 @@ class LoginViewController: UIViewController{
         self.view.addGestureRecognizer(recognizer)
 
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+
+
+    func keyboardWillShow(notification: NSNotification) {
+        let info:NSDictionary =  notification.userInfo!
+        let kbFrame:NSValue  = info.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame:CGRect  = kbFrame.CGRectValue()
+
+        self.keyboardHeight.constant = keyboardFrame.size.height
+    }
+
+    func keyboardWillHide(notification: NSNotification) {
+        self.keyboardHeight.constant = 0
+
+        UIView.animateWithDuration(0.2) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+        
     }
 
     func handleTap(recognizer: UITapGestureRecognizer) {

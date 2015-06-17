@@ -93,6 +93,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
         self.suggestbg.backgroundColor = colorize(0x2cc285, alpha: 0.85)
         self.btn_setnewLoc.layer.cornerRadius = 5
         self.btn_setnewLoc.backgroundColor = colorize(0xf96d6c, alpha: 1)
+        self.lblwelcome.textColor = colorize(0x2cc285, alpha: 1)
         self.tb.separatorInset = UIEdgeInsetsZero
         self.tb.rowHeight = UITableViewAutomaticDimension
         self.tb.estimatedRowHeight = 102
