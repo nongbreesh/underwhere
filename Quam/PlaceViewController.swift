@@ -20,8 +20,8 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
     var manager:CLLocationManager!
     var myLocations: [CLLocation] = []
     var hasFirstannotation:Bool = false
-    let spanX = 0.1
-    let spanY = 0.1
+    let spanX = 0.08
+    let spanY = 0.08
     var issetloc:Bool = true
     @IBOutlet var targetView: UIView!
     let  helper:Helper! = Helper()
@@ -142,7 +142,12 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
         self.cnttabbed = 0
         self.tabBarController?.delegate = self
 
-        self.tabBarController?.title = "สถานที่"
+
+    }
+
+
+   override func viewDidAppear(animated: Bool) {
+  self.tabBarController?.title = "Place"
     }
 
     func handlelngPress(gestureRecognizer:UILongPressGestureRecognizer){
@@ -247,8 +252,10 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
                             let newannotation = MKPointAnnotation()
                             let center = CLLocationCoordinate2D(latitude: dlat, longitude: dlng)
                             newannotation.coordinate = center
-                            newannotation.title = place.objectForKey("locname") as? String
-                            newannotation.subtitle = place.objectForKey("sublocname")  as? String
+//                            newannotation.title = place.objectForKey("locname") as? String
+//                            newannotation.subtitle = place.objectForKey("sublocname")  as? String
+                            newannotation.title = place.objectForKey("id") as! String
+                            newannotation.subtitle = place.objectForKey("countfollowing") as! String
 
                             self.theMap.addAnnotation(newannotation)
                             let circle:MKOverlay = MKCircle(centerCoordinate: center, radius: self._radius)
@@ -346,8 +353,10 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
                             let newannotation = MKPointAnnotation()
                             let center = CLLocationCoordinate2D(latitude: dlat, longitude: dlng)
                             newannotation.coordinate = center
-                            newannotation.title = place.objectForKey("locname") as? String
-                            newannotation.subtitle = place.objectForKey("sublocname")  as? String
+//                            newannotation.title = place.objectForKey("locname") as? String
+//                            newannotation.subtitle = place.objectForKey("sublocname")  as? String
+                            newannotation.title = place.objectForKey("id") as! String
+                            newannotation.subtitle = place.objectForKey("countfollowing") as! String
 
                             self.theMap.addAnnotation(newannotation)
                             let circle:MKOverlay = MKCircle(centerCoordinate: center, radius: self._radius)
@@ -519,12 +528,15 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
 
         cell.lblPlaceName.text = locname
         let imgprofile:NSURL!
-        if user_image == "" {
-            imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
-        }
-        else{
-            imgprofile = NSURL(string: "http://api.underwhere.in/public/uploads/user_img/\(user_image)");
-        }
+//        if user_image == "" {
+//            imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
+//        }
+//        else{
+//            imgprofile = NSURL(string: "http://api.underwhere.in/public/uploads/user_img/\(user_image)");
+//
+//        }
+
+        imgprofile =  NSURL(string: getPlaceLevel1(people.count))
         cell.imgcreateby.sd_setImageWithURL(imgprofile)
         cell.imgcreateby.clipsToBounds = true
         cell.imgcreateby.layer.cornerRadius =    cell.imgcreateby.frame.size.width / 2
@@ -814,33 +826,44 @@ class PlaceViewController: UIViewController , CLLocationManagerDelegate ,MKMapVi
     
     
     
-    //    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-    //
-    //
-    //        if !(annotation is MKPointAnnotation) {
-    //            //if annotation is not an MKPointAnnotation (eg. MKUserLocation),
-    //            //return nil so map draws default view for it (eg. blue dot)...
-    //            return nil
-    //        }
-    //        
-    //        let reuseId = "test"
-    //        
-    //        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-    //        if anView == nil {
-    //            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-    //            anView.image = UIImage(named:"pinonmap")
-    //            anView.canShowCallout = true
-    //        }
-    //        else {
-    //            //we are re-using a view, update its annotation reference...
-    //            anView.annotation = annotation
-    //        }
-    //        
-    //        return anView
-    //        
-    //    }
-    
-    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+
+
+        if !(annotation is MKPointAnnotation) {
+            //if annotation is not an MKPointAnnotation (eg. MKUserLocation),
+            //return nil so map draws default view for it (eg. blue dot)...
+            return nil
+        }
+
+
+        let reuseId = "pin"
+
+
+        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        if anView == nil {
+            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+
+
+            anView.canShowCallout = false
+        }
+        else {
+            //we are re-using a view, update its annotation reference...
+            anView.annotation = annotation
+        }
+
+        var  img =  NSURL(string: getPlaceLevel2(annotation.subtitle!.toInt()!))
+        var imgsrc:UIImageView! = UIImageView()
+        imgsrc.sd_setImageWithURL(img)
+
+
+        anView.image = imgsrc.image
+        anView.frame = CGRectMake(0, 0, 30, 35)
+
+        return anView
+
+    }
+
+
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
         /*if overlay is MKPolyline {

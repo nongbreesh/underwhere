@@ -188,7 +188,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
 
     func getData(){
-        self.refreshControl.beginRefreshing()
+//        self.refreshControl.beginRefreshing()
         //        ActivityIndicatory(self.view ,true,false)
         let url = NSURL(string:"http://api.underwhere.in/api/getuser")
         let request = NSMutableURLRequest(URL:url!)
@@ -314,15 +314,15 @@ class ProfileViewController: UIViewController , UITableViewDelegate
                         }
                         if  (self.limit - 1) - 20 <= data.count{
                             self.tb_profile.reloadData()
-                            self.refreshControl.endRefreshing()
+                            //self.refreshControl.endRefreshing()
                         }
                         else{
-                            self.refreshControl.endRefreshing()
+                            //self.refreshControl.endRefreshing()
                             self.tb_profile.tableFooterView?.hidden = true
                         }
                     }
                     else{
-                        self.refreshControl.endRefreshing()
+                        //self.refreshControl.endRefreshing()
                         self.tb_profile.reloadData()
                         self.tb_profile.tableFooterView?.hidden = true
                     }
@@ -504,11 +504,10 @@ class ProfileViewController: UIViewController , UITableViewDelegate
                 cell.img_post.clipsToBounds = true
                 cell.img_post.sd_setImageWithURL(imgpost)
                 cell.lbl_range.text  = "\(distance)KM"
-                cell.lblcountcomment.text = count_comment
+                cell.lblcountcomment.text = "\(count_comment) comments"
                 cell.parent =  parent
                 cell.btnMore.tag = indexPath.row
                 cell.btnMore.addTarget(self, action: "btnClick:", forControlEvents: UIControlEvents.TouchUpInside)
-                cell.lblcountcomment.text = count_comment
 
                 cell.btnaddplace.tag =  locid.toInt()!
 
@@ -543,7 +542,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
                 cell.btn_love.setBackgroundImage(UIImage(named: "ic_love.png"), forState: UIControlState.Normal)
 
-                cell.lblLove.text  = "+\(count_like)"
+                cell.lblLove.text  = "\(count_like) likes"
 
                 cell.postid = id
 
@@ -568,7 +567,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
                 for (index, element) in enumerate(self.didCountLike) {
                     if element.0 == id.toInt()!{
-                        cell.lblLove.text  = "+\(element.1)"
+                        cell.lblLove.text  = "\(element.1) likes"
                     }
                 }
 
@@ -599,7 +598,7 @@ class ProfileViewController: UIViewController , UITableViewDelegate
 
                 let imgpost = NSURL(string: images!);
                 cell.lbl_range.text  = "\(distance)KM"
-                cell.lblcountcomment.text = count_comment
+                cell.lblcountcomment.text = "\(count_comment) comments"
                 return cell
 
             }
@@ -812,10 +811,10 @@ class ProfileViewController: UIViewController , UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if !preventAnimation.contains(indexPath) {
-            preventAnimation.insert(indexPath)
-            TipInCellAnimator.animate(cell)
-        }
+//        if !preventAnimation.contains(indexPath) {
+//            preventAnimation.insert(indexPath)
+//            TipInCellAnimator.animate(cell)
+//        }
         if self.tb_profile.tableFooterView?.hidden == false{
             self.nextpage = ListArray.count - 1
             

@@ -38,6 +38,12 @@ class PostDetailCell: UITableViewCell{
     var profileid:String!
     var createBy = ""
 
+       @IBOutlet weak var img_user_like1: UIImageView!
+       @IBOutlet weak var img_user_like2: UIImageView!
+       @IBOutlet weak var img_user_like3: UIImageView!
+       @IBOutlet weak var img_user_like4: UIImageView!
+       @IBOutlet weak var img_user_like5: UIImageView!
+
     @IBOutlet weak var lbl_range: UILabel!
 
 
@@ -47,7 +53,7 @@ class PostDetailCell: UITableViewCell{
         self.layoutMargins = UIEdgeInsetsZero;
         self.preservesSuperviewLayoutMargins = false;
         self.contentview.backgroundColor = colorize(0xDFE2E5, alpha: 1)
-        self.botview.backgroundColor = colorize(0xFFFFFF, alpha: 1)
+        self.botview.backgroundColor = colorize(0xF3F3F5, alpha: 1)
         self.lbl_createby.textColor = colorize(0x2cc285, alpha: 1)
         self.lbl_createdate.textColor = colorize(0xAAAAAA, alpha: 1)
         self.lbl_description.textColor = colorize(0x4C4C4C, alpha: 1)
@@ -102,10 +108,10 @@ class PostDetailCell: UITableViewCell{
 
                             var rs: Int! = result?.objectForKey("result") as! Int
                             if rs > 0{
-                                self.lblcountLike.text = "+\(rs)"
+                                self.lblcountLike.text = "\(rs) likes"
                             }
                             else{
-                                self.lblcountLike.text = "+\(rs)"
+                                self.lblcountLike.text = "\(rs) likes"
                             }
                         })
 

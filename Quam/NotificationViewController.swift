@@ -84,12 +84,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(animated: Bool) {
         var chkcell = [Int]()
         self.cnttabbed = 0
-        self.tabBarController?.title = "การแจ้งเตือน"
+
         self.tabBarController?.delegate = self
     }
 
 
     override func viewDidAppear(animated: Bool) {
+        self.tabBarController?.title = "Notification"
         super.viewDidAppear(animated)
 
         navigationController?.hidesBarsOnSwipe = false

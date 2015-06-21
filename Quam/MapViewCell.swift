@@ -11,6 +11,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
+
 class MapViewCell: UITableViewCell , CLLocationManagerDelegate ,MKMapViewDelegate {
 
     @IBOutlet var bgview: UIView!

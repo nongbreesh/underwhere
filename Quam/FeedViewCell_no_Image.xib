@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -19,6 +20,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_people_here.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ftb-U7-Ghd">
                                 <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Kjo-f5-jhM"/>
                                     <constraint firstAttribute="height" constant="50" id="RyM-mI-zfq"/>
@@ -26,12 +28,14 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOY-2V-uI6">
                                 <rect key="frame" x="70" y="15" width="349" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-oc-vFF">
                                 <rect key="frame" x="70" y="40" width="15" height="15"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="NH8-HR-RCx"/>
                                     <constraint firstAttribute="width" constant="15" id="kAM-rT-a66"/>
@@ -39,12 +43,14 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cte-C6-SHc">
                                 <rect key="frame" x="88" y="41" width="29" height="14"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Mt-dM-He8">
                                 <rect key="frame" x="8" y="68" width="393" height="1"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="9Ze-zz-4cd"/>
@@ -52,6 +58,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqu-ot-bBy">
                                 <rect key="frame" x="10" y="77" width="397" height="26"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -61,12 +68,14 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS8-Gc-0qA">
                                         <rect key="frame" x="14" y="9" width="73" height="21"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="eWZ-ZO-fo1">
                                         <rect key="frame" x="366" y="12" width="15" height="15"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="b1D-ia-fQw"/>
                                             <constraint firstAttribute="height" constant="15" id="jLa-NJ-1R4"/>
@@ -74,11 +83,13 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-uI-Isf">
                                         <rect key="frame" x="389" y="9" width="20" height="21"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.88235294117647056" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.9803922176361084" green="0.19607844948768616" blue="0.11764706671237946" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qwN-uI-Isf" secondAttribute="trailing" constant="10" id="2Ka-68-q9z"/>
@@ -98,6 +109,7 @@
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="ic_feed_pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="PnV-th-Q9e">
                                 <rect key="frame" x="343" y="8" width="20" height="24"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="B5C-0w-qXk"/>
                                     <constraint firstAttribute="height" id="KxA-fc-iCK"/>
@@ -105,12 +117,14 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="14KM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKu-UT-V9o">
                                 <rect key="frame" x="371" y="11" width="46" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.019607843829999999" green="0.023529414089999999" blue="0.0078431377190000002" alpha="0.25" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goB-Dp-siU">
                                 <rect key="frame" x="329" y="8" width="40" height="24"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="900-0R-mvU"/>
                                     <constraint firstAttribute="height" constant="24" id="KtM-5L-Q7v"/>
@@ -120,6 +134,7 @@
                                 </state>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.9960784912109375" green="0.99215692281723022" blue="0.99215692281723022" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="5Mt-dM-He8" firstAttribute="leading" secondItem="dEJ-qb-uJl" secondAttribute="leadingMargin" id="0FT-CN-W8I"/>
@@ -175,6 +190,7 @@
                         </variation>
                     </view>
                 </subviews>
+                <animations/>
                 <color key="backgroundColor" red="0.1294117719" green="0.1019607931" blue="0.03529411927" alpha="1" colorSpace="deviceRGB"/>
                 <constraints>
                     <constraint firstItem="dEJ-qb-uJl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2D1-q2-NFd"/>
@@ -183,6 +199,7 @@
                     <constraint firstAttribute="trailing" secondItem="dEJ-qb-uJl" secondAttribute="trailing" constant="10" id="zFt-0x-8k2"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="bgview" destination="dEJ-qb-uJl" id="ZKG-eO-aOQ"/>
                 <outlet property="botview" destination="D7b-sk-Xb5" id="h28-sy-87d"/>
@@ -201,7 +218,7 @@
     <resources>
         <image name="btn_addplace.png" width="54" height="35"/>
         <image name="ic_clock.png" width="16" height="16"/>
-        <image name="ic_comment.png" width="23" height="23"/>
+        <image name="ic_comment.png" width="18" height="17"/>
         <image name="ic_feed_pin.png" width="15" height="20"/>
         <image name="ic_people_here.png" width="16" height="19"/>
     </resources>

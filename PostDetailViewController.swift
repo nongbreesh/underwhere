@@ -113,6 +113,14 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
 
     }
 
+    func openProfile(recognizer: UITapGestureRecognizer) {
+        let theTappedImageView:UIImageView! =  recognizer.view as! UIImageView
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        let vc : ProfileViewController! =  self.storyboard?.instantiateViewControllerWithIdentifier("profile") as! ProfileViewController
+        vc.profileid = "\(theTappedImageView.tag )"
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
+
     func handleTap(recognizer: UITapGestureRecognizer) {
         self.txtComment.resignFirstResponder()
     }
@@ -393,8 +401,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
                     var data: AnyObject? = result?.objectForKey("result")
 
                     if data != nil {
-                        //                    println(data)
-                        var slist =   [String:String]()
+                       var slist =   [String:AnyObject]()
 
                         var id: String?  = data?.objectForKey("id") as? String
 
@@ -437,6 +444,28 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
                          slist.updateValue(userlng, forKey: "userlng")
 
                         self.title = name
+
+
+                         var people: [AnyObject]! = result?.objectForKey("people") as! [AnyObject]!
+                        let PeopleArray = NSMutableArray()
+
+                        for (peopleindex, peopleelement) in enumerate(people) {
+                            var peopleslist =   [String:String]()
+                             let userid: String?  = peopleelement.objectForKey("id") as? String
+                            let fbid: String?  = peopleelement.objectForKey("fbid") as? String
+                            let name: String? = peopleelement.objectForKey("name") as? String
+                            let user_image: String?  = peopleelement.objectForKey("user_image")as? String
+
+                              peopleslist.updateValue(userid!, forKey: "userid")
+                            peopleslist.updateValue(fbid!, forKey: "fbid")
+                            peopleslist.updateValue(name!, forKey: "name")
+                            peopleslist.updateValue(user_image!, forKey: "user_image")
+                            PeopleArray.addObject(peopleslist)
+                        }
+                         slist.updateValue(PeopleArray, forKey: "people")
+
+
+
                         self.ListArray.addObject(slist) // for header
 
                         self.ListArray.addObject(slist) // for mapview cell
@@ -522,6 +551,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
 
         if indexPath.row == 0{
+            let people:[NSDictionary]! = ListArray.objectAtIndex(indexPath.row)["people"] as! [NSDictionary]
             var id: String! = ListArray.objectAtIndex(indexPath.row)["id"] as! String
             var fbid: String? = ListArray.objectAtIndex(indexPath.row)["fbid"] as? String
             var name: String! = ListArray.objectAtIndex(indexPath.row)["name"] as! String
@@ -561,7 +591,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
             cell.img_userpost.layer.cornerRadius = cell.img_userpost.frame.size.width / 2
 
             cell.parent = self.navigationController
-            cell.lblcountcomment.text = count_comment
+            cell.lblcountcomment.text = "\(count_comment) comments"
 
             cell.lat = userlat
               cell.lng = userlng
@@ -605,7 +635,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
             cell.btnLove.setBackgroundImage(UIImage(named: "ic_love.png"), forState: UIControlState.Normal)
 
 
-            cell.lblcountLike.text  = "+\(count_like)"
+            cell.lblcountLike.text  = "\(count_like) likes"
 
             cell.postid = id.toInt()!
             cell.userid = self.userid as String
@@ -634,6 +664,80 @@ class PostDetailViewController: UIViewController, UITableViewDelegate,UITableVie
                     cell.lblcountLike.text  = "+\(element.1)"
                 }
             }
+
+
+
+            for (index, element) in enumerate(people) {
+                println(element)
+                 let userid: String!  = element.objectForKey("userid") as! String
+                let fbid: String?  = element.objectForKey("fbid") as? String
+                var name: String? = element.objectForKey("name") as? String
+                let follower_image: String! = element.objectForKey("user_image") as! String
+
+
+                var imgfollwer:NSURL!
+                if follower_image == "" {
+                    imgfollwer = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
+                }
+                else{
+                    imgfollwer = NSURL(string: "http://api.underwhere.in/public/uploads/user_img/\(follower_image)");
+                }
+
+                if index == 0{
+                    cell.img_user_like1.sd_setImageWithURL(imgfollwer)
+                    cell.img_user_like1.clipsToBounds = true
+                    cell.img_user_like1.layer.cornerRadius =  cell.img_user_like1.frame.size.width / 2
+                    cell.img_user_like1.hidden = false
+                     cell.img_user_like1.userInteractionEnabled = true
+                    let recognizer = UITapGestureRecognizer(target: self, action: Selector("openProfile:"))
+                    cell.img_user_like1.tag = userid.toInt()!
+                    cell.img_user_like1.addGestureRecognizer(recognizer)
+                }
+                if index == 1{
+                    cell.img_user_like2.sd_setImageWithURL(imgfollwer)
+                    cell.img_user_like2.clipsToBounds = true
+                    cell.img_user_like2.layer.cornerRadius =   cell.img_user_like2.frame.size.width / 2
+cell.img_user_like2.userInteractionEnabled = true
+                    cell.img_user_like2.hidden = false
+                    let recognizer = UITapGestureRecognizer(target: self, action: Selector("openProfile:"))
+                    cell.img_user_like2.tag = userid.toInt()!
+                    cell.img_user_like2.addGestureRecognizer(recognizer)
+                    
+                }
+                if index == 2{
+                    cell.img_user_like3.sd_setImageWithURL(imgfollwer)
+                    cell.img_user_like3.clipsToBounds = true
+                    cell.img_user_like3.layer.cornerRadius =   cell.img_user_like3.frame.size.width / 2
+cell.img_user_like3.userInteractionEnabled = true
+                    cell.img_user_like3.hidden = false
+                    let recognizer = UITapGestureRecognizer(target: self, action: Selector("openProfile:"))
+                    cell.img_user_like3.tag = userid.toInt()!
+                    cell.img_user_like3.addGestureRecognizer(recognizer)
+                }
+                if index == 3{
+                    cell.img_user_like4.sd_setImageWithURL(imgfollwer)
+                    cell.img_user_like4.clipsToBounds = true
+                    cell.img_user_like4.layer.cornerRadius =   cell.img_user_like4.frame.size.width / 2
+cell.img_user_like4.userInteractionEnabled = true
+                    cell.img_user_like4.hidden = false
+                    let recognizer = UITapGestureRecognizer(target: self, action: Selector("openProfile:"))
+                    cell.img_user_like4.tag = userid.toInt()!
+                    cell.img_user_like4.addGestureRecognizer(recognizer)
+                }
+                if index == 4{
+                    cell.img_user_like5.sd_setImageWithURL(imgfollwer)
+                    cell.img_user_like5.clipsToBounds = true
+                    cell.img_user_like5.layer.cornerRadius =   cell.img_user_like5.frame.size.width / 2
+                    cell.img_user_like5.userInteractionEnabled = true
+                    cell.img_user_like5.hidden = false
+                    let recognizer = UITapGestureRecognizer(target: self, action: Selector("openProfile:"))
+                    cell.img_user_like5.tag = userid.toInt()!
+                    cell.img_user_like5.addGestureRecognizer(recognizer)
+                }
+                
+                
+            }
+
 
 
 

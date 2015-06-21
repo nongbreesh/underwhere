@@ -90,7 +90,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
         self.view.backgroundColor = colorize(0xFFFFFF, alpha: 1)
         self.tb.separatorColor = colorize(0xEEF2F5, alpha: 1)
         self.tb.backgroundColor = colorize(0xEEF2F5, alpha: 1)
-        self.suggestbg.backgroundColor = colorize(0x2cc285, alpha: 0.85)
+        self.suggestbg.backgroundColor = colorize(0x2cc285, alpha: 0.89)
         self.btn_setnewLoc.layer.cornerRadius = 5
         self.btn_setnewLoc.backgroundColor = colorize(0xf96d6c, alpha: 1)
         self.lblwelcome.textColor = colorize(0x2cc285, alpha: 1)
@@ -122,11 +122,11 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
 
         if is_frommap {
             self.title = "Neaby \(maptitle)"
-            self.lblwelcome.text = "อุปส์!"
-            self.lblwelcomedetail.text = "ดูเหมือนว่าจะไม่มีสถานที่รอบๆ \"\(self.maptitle)\" เลยนะ"
+            self.lblwelcome.text = "Oops!"
+            self.lblwelcomedetail.text = "Nothing seems to happen around \"\(self.maptitle)\""
         }
         else{
-            self.title = "มีอะไรใหม่"
+            self.title = "Suggest"
         }
     }
 
@@ -149,6 +149,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
 
         }
     }
+
 
 
 
@@ -177,7 +178,7 @@ class SuggestController: UIViewController , UITableViewDelegate,CLLocationManage
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.hidesBarsOnSwipe = false
+         self.tabBarController?.title = self.title
     }
 
 
@@ -461,12 +462,16 @@ var user_image: String?  = element.objectForKey("user_image")as? String
         cell.Distance.text = "\(distance)KM"
         cell.lblPlaceName.text = "@\(locname)"
         let imgprofile:NSURL!
-         if user_image == "" {
-            imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
-        }
-        else{
-            imgprofile = NSURL(string: "http://api.underwhere.in/public/uploads/user_img/\(user_image)");
-        }
+//         if user_image == "" {
+//            imgprofile = NSURL(string: "http://graph.facebook.com/\(String(fbid!))/picture?type=normal");
+//        }
+//        else{
+//            imgprofile = NSURL(string: "http://api.underwhere.in/public/uploads/user_img/\(user_image)");
+//        }
+
+           imgprofile =  NSURL(string: getPlaceLevel1(countfollowing.toInt()!))
+
+
         cell.imgcreateby.sd_setImageWithURL(imgprofile)
         cell.imgcreateby.clipsToBounds = true
         cell.imgcreateby.layer.cornerRadius =   5 //cell.imgcreateby.frame.size.width / 2

@@ -60,7 +60,7 @@ class FeedViewCell: UITableViewCell,UIActionSheetDelegate{
         self.preservesSuperviewLayoutMargins = false;
 
         self.contentview.backgroundColor = colorize(0xDFE2E5, alpha: 1)
-        self.botview.backgroundColor = colorize(0xFFFFFF, alpha: 1)
+        self.botview.backgroundColor = colorize(0xF3F3F5, alpha: 1)
         self.lbl_createfrom.textColor = colorize(0xAAAAAA, alpha: 1)
         self.lbl_description.textColor = colorize(0x4C4C4C, alpha: 1)
         self.lbl_createby.textColor = colorize(0x2cc285, alpha: 1)
@@ -150,10 +150,10 @@ class FeedViewCell: UITableViewCell,UIActionSheetDelegate{
 
                             let rs: Int! = result?.objectForKey("result") as! Int
                             if rs > 0{
-                                self.lblLove.text = "+\(rs)"
+                                self.lblLove.text = "\(rs) likes"
                             }
                             else{
-                                self.lblLove.text = "+\(rs)"
+                                self.lblLove.text = "\(rs) likes"
                             }
 
                         })

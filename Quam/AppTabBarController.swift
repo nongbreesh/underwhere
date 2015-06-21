@@ -164,37 +164,22 @@ class AppTabBarController: UITabBarController,UITabBarDelegate,BadgeListener{
         self.UpdateBadge()
         //println(str)
         switch str {
-        case "เกิดอะไรขึ้น":
-            //            self.btn_Openmap.hidden = true
-            //            self.btn_post.hidden = false
-            self.navigationController?.navigationBarHidden = true
-            self.navigationItem.title = "เกิดอะไรขึ้น"
-        case "สถานที่":
-            //            self.btn_post.hidden = true
-            //            self.btn_Openmap.hidden = false
+        case "Happening":
             self.navigationController?.navigationBarHidden = false
-            self.navigationItem.title = "สถานที่"
-        case "มีอะไรใหม่":
-            //            self.btn_post.hidden = true
-            //            self.btn_Openmap.hidden = true
+        case "Place":
             self.navigationController?.navigationBarHidden = false
-            self.navigationItem.title = "มีอะไรใหม่"
-        case "การแจ้งเตือน":
-            //            self.btn_post.hidden = true
-            //            self.btn_Openmap.hidden = true
-            //                   self.navigationItem.title = "Notification"
+        case "Suggest":
+            self.navigationController?.navigationBarHidden = false
+        case "Notification":
             self.navigationController?.navigationBarHidden = false
             UIApplication.sharedApplication().applicationIconBadgeNumber = 0
             self.activenotification()
-        case "ข้อมูลส่วนตัว":
+        case "Me":
             self.navigationController?.navigationBarHidden = true
-            self.navigationItem.title = "ข้อมูลส่วนตัว"
         default:
             self.navigationController?.navigationBarHidden = false
-          
-            self.navigationItem.title = "เกิดอะไรขึ้น"
         }
-        
+
         
     }
     

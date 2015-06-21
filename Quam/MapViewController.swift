@@ -118,6 +118,19 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
         //navigationController?.pushViewController(vc, animated: false)
     }
 
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!){
+
+        var v_args =  view.annotation.title!.componentsSeparatedByString(",")
+        let vc : FeedviewController! =  self.storyboard?.instantiateViewControllerWithIdentifier("Feedview") as! FeedviewController
+        vc.locationid = v_args[0]
+        vc.locname = v_args[1]
+        vc.lat = "0"
+        vc.lng = "0"
+        //vc.locname = locname
+        self.showViewController(vc as UIViewController, sender: vc)
+
+    }
+
     func mapclick(gestureRecognizer:UIGestureRecognizer){
         if(countpress == 0){
             countpress++
@@ -262,8 +275,17 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
                         //println(center.latitude)
                         var newannotation = MKPointAnnotation()
                         newannotation.coordinate = center
-                        newannotation.title = element.objectForKey("locname") as! String?
-                        newannotation.subtitle = element.objectForKey("sublocname") as! String?
+//                        newannotation.title = element.objectForKey("locname") as! String?
+//                        let distance:NSString!  = element.objectForKey("distance") as! NSString
+//                         var   strdistance =   String(format: "%.2f", distance.doubleValue)
+//                        newannotation.subtitle = "\(strdistance) KM"
+
+                        var id =  element.objectForKey("id") as! String
+                        var title = element.objectForKey("locname") as! String
+                        var vtitle = "\(id),\(title)"
+                        newannotation.title = vtitle
+                        newannotation.subtitle = element.objectForKey("countfollowing") as! String
+
                         self.theMap.addAnnotation(newannotation)
                         //var an:MKAnnotation = self.theMap.annotations[index] as MKAnnotation
                         //self.theMap.selectAnnotation(an, animated: true)
@@ -326,16 +348,12 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
             if(error == nil){
                 dispatch_async(dispatch_get_main_queue(), {
                     if data == "success" {
-                        var newannotation = MKPointAnnotation()
-                        newannotation.coordinate = touchMapCoordinate
-                        newannotation.title = locname
-                        newannotation.subtitle = sublocname
-                        self.theMap.addAnnotation(newannotation)
+
                         var circle = MKCircle(centerCoordinate: touchMapCoordinate, radius: self._radius)
                         self.theMap.addOverlay(circle)
                         ActivityIndicatory(self.view ,false,false)
                           self.btnSetLocation.enabled = true
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.navigationController?.popViewControllerAnimated(true)
 
                     }
 
@@ -386,31 +404,41 @@ class MapViewController: UIViewController , CLLocationManagerDelegate ,MKMapView
 
 
 
-    //    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-    //
-    //
-    //        if !(annotation is MKPointAnnotation) {
-    //            //if annotation is not an MKPointAnnotation (eg. MKUserLocation),
-    //            //return nil so map draws default view for it (eg. blue dot)...
-    //            return nil
-    //        }
-    //
-    //        let reuseId = "test"
-    //
-    //        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-    //        if anView == nil {
-    //            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-    //            anView.image = UIImage(named:"pinonmap")
-    //            anView.canShowCallout = true
-    //        }
-    //        else {
-    //            //we are re-using a view, update its annotation reference...
-    //            anView.annotation = annotation
-    //        }
-    //
-    //        return anView
-    //
-    //    }
+        func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    
+    
+            if !(annotation is MKPointAnnotation) {
+                return nil
+            }
+
+    
+            let reuseId = "pin"
+
+
+
+
+
+
+            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            if anView == nil {
+                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                anView.canShowCallout = false
+            }
+            else {
+                anView.annotation = annotation
+            }
+
+            var  img =  NSURL(string: getPlaceLevel2(annotation.subtitle!.toInt()!))
+            var imgsrc:UIImageView! = UIImageView()
+            imgsrc.sd_setImageWithURL(img)
+
+
+            anView.image = imgsrc.image
+            anView.frame = CGRectMake(0, 0, 30, 35)
+    
+            return anView
+    
+        }
 
 
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {

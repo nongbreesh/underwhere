@@ -354,7 +354,7 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
         //        self.textInput.text = "Type what happening around here..."
         //        self.textInput.textColor = colorize(0xC8C8C8, alpha: 1)
 
-        self.textInput.text = "บอกกับทุกคน ว่าเกิดอะไรขึ้นที่นี่..."
+        self.textInput.text = "What happening here..."
         self.textInput.textColor = UIColor.lightGrayColor()
         self.textInput.scrollEnabled = true
 
@@ -381,7 +381,7 @@ class PostViewController: UIViewController,UITextViewDelegate , CLLocationManage
 
     func textViewDidEndEditing(textView: UITextView) {
         if textView.text.isEmpty {
-            self.textInput.text = "Type what happening around here..."
+            self.textInput.text = "What's happening around here..."
             self.textInput.textColor = UIColor.lightGrayColor()
         }
     }

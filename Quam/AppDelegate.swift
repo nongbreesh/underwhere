@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
 
 //                tabbar.shadowImage = UIImage()
-//                tabbar.translucent = false
+              tabbar.translucent = true
 //        tabbar.backgroundImage = UIImage(named: "tabbarbg")
         tabbar.tintColor = colorize(0x2cc285, alpha: 1)
 
@@ -233,7 +233,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         for var i = 0; i < deviceToken.length; i++ {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
-
+        
         self.registerDeviceToken(tokenString)
 
     }
@@ -301,6 +301,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     
 }
+
+
 
 
 

@@ -174,12 +174,12 @@ class SettingViewController: UITableViewController,UITableViewDelegate {
                         self.switch_posttowall.setOn(false, animated:true)
                     }
 
-                    if fbid != "0"{
+                    if fbid == "0"{
 
                         let recognizer = UITapGestureRecognizer(target: self, action: Selector("fbConect:"))
                         self.cell_fb_connect.addGestureRecognizer(recognizer)
                         self.lbl_isfbconnected.text = "not connect"
-                        self.switch_posttowall.setOn(false, animated:true)
+                        self.switch_posttowall.setOn(false, animated:false)
                         self.switch_posttowall.enabled = false
                     }
                     else{
@@ -235,7 +235,8 @@ class SettingViewController: UITableViewController,UITableViewDelegate {
                     var result = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: NSErrorPointer()) as? NSDictionary
                     var data: AnyObject? = result?.objectForKey("result")
 
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+//                    self.navigationController?.popToRootViewControllerAnimated(true)
+                      self.navigationController?.popViewControllerAnimated(true)
 
                 })
 

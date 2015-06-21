@@ -27,6 +27,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
     var ListArray = NSMutableArray()
     var preventAnimation = Set<NSIndexPath>()
 
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var lblNoData: UILabel!
     @IBOutlet var holizonbg: UIView!
     @IBOutlet var horizontalView: MMHorizontalListView!
@@ -62,7 +63,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
 
         self.holizonbg.backgroundColor = colorize(0x000000, alpha: 0.5)
 
-        self.getUserByLoc()
+
 
 
 
@@ -91,6 +92,10 @@ class FeedviewController: UIViewController , UITableViewDelegate
         self.tb.registerNib(UINib(nibName: "FeedViewCell_no_Image", bundle: nil), forCellReuseIdentifier: "FeedViewCell_no_Image")
 
 
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+             self.getUserByLoc()
     }
 
     func MMHorizontalListViewNumberOfCells(horizontalListView:MMHorizontalListView!) -> NSInteger{
@@ -149,6 +154,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
 
 
     func getUserByLoc(){
+
         let url = NSURL(string:"http://api.underwhere.in/api/get_user_following_location")
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST"
@@ -179,9 +185,12 @@ class FeedviewController: UIViewController , UITableViewDelegate
                     }
 
                     if data.count > 0 {
+
+
                         self.holizonbg.hidden = true
                     }
                     else{
+
                         self.holizonbg.hidden = true
                     }
 
@@ -217,7 +226,9 @@ class FeedviewController: UIViewController , UITableViewDelegate
 
     }
 
-
+   override  func viewDidAppear(animated: Bool){
+     self.getData(locationid!,lat: self.lat!,lng: self.lng!,currentPage: self.offset,nexPage: self.limit)
+    }
     override func viewWillAppear(animated: Bool) {
         self.lblNoData.hidden = true
         self.offset = 0
@@ -228,10 +239,12 @@ class FeedviewController: UIViewController , UITableViewDelegate
         self.didLike = [Int]()
         self.didCountLike = [Int,Int]()
         self.chkcell = [Int]()
+        self.loadingIndicator.hidden = false
+        self.loadingIndicator.startAnimating()
         self.tb.tableFooterView?.hidden = false
         self.navigationController?.navigationBarHidden = false
         UIApplication.sharedApplication().statusBarHidden = false
-        self.getData(locationid!,lat: self.lat!,lng: self.lng!,currentPage: self.offset,nexPage: self.limit)
+
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -344,6 +357,8 @@ class FeedviewController: UIViewController , UITableViewDelegate
                         self.tb.reloadData()
 
                     }
+                    self.loadingIndicator.stopAnimating()
+                    self.loadingIndicator.hidden = true
                 })
 
             }
@@ -354,10 +369,10 @@ class FeedviewController: UIViewController , UITableViewDelegate
     }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if !preventAnimation.contains(indexPath) {
-            preventAnimation.insert(indexPath)
-            TipInCellAnimator.animate(cell)
-        }
+//        if !preventAnimation.contains(indexPath) {
+//            preventAnimation.insert(indexPath)
+//            TipInCellAnimator.animate(cell)
+//        }
         if self.tb.tableFooterView?.hidden == false{
             self.nextpage = ListArray.count - 1
 
@@ -443,7 +458,7 @@ class FeedviewController: UIViewController , UITableViewDelegate
             cell.img_post.clipsToBounds = true
             cell.img_post.sd_setImageWithURL(imgpost)
             cell.lbl_range.text  = "\(distance)KM"
-            cell.lblcountcomment.text = count_comment
+            cell.lblcountcomment.text =  "\(count_comment) comments"
             cell.btnMore.tag = indexPath.row
             cell.btnMore.addTarget(self, action: "btnClick:", forControlEvents: UIControlEvents.TouchUpInside)
             cell.parent = self
